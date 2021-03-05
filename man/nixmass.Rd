@@ -25,14 +25,14 @@ nixmass(data, model = c("delta.snow","jo09","pi16","st10","gu19"),
 \code{nixmass}{ This function is a wrapper for the computation of SWE with different models. The process based model \code{\link[=swe.delta.snow]{delta.snow}} can be chosen, as well as different empirical regression models of \code{\link[=swe.jo09]{Jonas},\link[=swe.pi16]{Pistocchi}, \link[=swe.st10]{Sturm}} and \link[=swe.gu19]{Guyennon}}.
 For the "delta.snow" model and the ones of "Pistocchi" and "Guyennon", the needed parameters and coefficients from the original references are set as default. They can however be changed according to results from other datasets. For the other models of "Jonas" and "Sturm" regression coefficients are fixed. 
 
-In its current implementation, matrices holding the snowpack and all its layers are predefined. This makes the iteration over the whole provided period of snow height values slow, if many years have to be modeled at once. It is therefore strongly recommended to split computation of SWE values into single years, separated by zero values for snow height. In a future implementation, this will be speeded up. By computing only two days at once, pre-allocation of matrices can be restricted, but may not be completely avoided.
+The computation is quite fast and there does not exist any restriction regarding the length of the data. However, if many years have to be modeled at once, it is recommended to split the computation into single years, separated by zero snow depth values. 
 }
 
 \value{
   A list of class \code{"nixmass"} with components:
   \item{swe}{ Contains a list of numerical vectors. Each entry refers to SWE values computed with the selected model(s). }
   \item{date}{Character vector of date strings in the format \code{YYYY-MM-DD}.}
-  \item{hs}{Vector of snow height values used to compute SWE. }
+  \item{hs}{Vector of snow depth values used to compute SWE. }
 }
 
 \author{Harald Schellander, Michael Winkler}
@@ -46,12 +46,12 @@ In its current implementation, matrices holding the snowpack and all its layers 
 \cr\cr 	
  	Sturm, M. et al. (2010) "Estimating Snow Water Equivalent Using Snow Depth Data and Climate Classes", Journal of Hydrometeorology, 11(6), pp. 1380 - 1394. doi: 10.1175/2010JHM1202.1.
 \cr\cr
-Winkler, M., Schellander, H., and Gruber, S. (submitted) "Snow Water Equivalents exclusively from Snow Heights and their temporal Changes: The delta.snow.model". Hydrology and Earth System Sciences Discussions.
+Winkler, M., Schellander, H., and Gruber, S.: Snow water equivalents exclusively from snow depths and their temporal changes: the delta.snow model, Hydrol. Earth Syst. Sci., 25, 1165-1187, doi: 10.5194/hess-25-1165-2021, 2021.
 }
 
 
 \examples{
-## Load example data with realistic snow height values 
+## Load example data with realistic snow depth values 
 ## from a station at 600 meters in the northern Alps
 ## Note that the winter season is set to an arbitrary date 
 ## to mask its origin
